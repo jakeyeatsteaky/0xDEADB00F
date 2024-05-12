@@ -1,4 +1,4 @@
-# 0xDEADBEEF Rendering Engine
+# 0xDEADB00F Rendering Engine
 ## Platform: VULKAN - C++ - SDL2
 
 ### Dependencies:
