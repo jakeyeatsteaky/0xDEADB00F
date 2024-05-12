@@ -1,6 +1,9 @@
 #include "Windowing.hpp"
 #include "Logger.hpp"
 
+constexpr int DEFAULT_WINDOW_WIDTH = 800;
+constexpr int DEFAULT_WINDOW_HEIGHT = 600;
+
 Window::Window() :
     m_window(nullptr, SDL_DestroyWindow)
 {
@@ -20,9 +23,9 @@ bool Window::Init()
     SDL_Window* window = SDL_CreateWindow("0xDEADBEEF",
                                 SDL_WINDOWPOS_CENTERED,
                                 SDL_WINDOWPOS_CENTERED,
-                                800,
-                                600,
-                                SDL_WINDOW_SHOWN);
+                                DEFAULT_WINDOW_WIDTH,
+                                DEFAULT_WINDOW_HEIGHT,
+                                SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     if(nullptr == window) { 
         ERR("Failed to create SDL window", SDL_GetError());
         return ret;

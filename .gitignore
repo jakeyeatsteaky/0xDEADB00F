@@ -34,7 +34,7 @@
 /build
 *.user
 
-third_party/*/build/
-third_party/*/logs/
-third_party/*/*.o
-third_party/*/*.a
+app/third_party/*/build/
+app/third_party/*/logs/
+app/third_party/*/*.o
+app/third_party/*/*.a
