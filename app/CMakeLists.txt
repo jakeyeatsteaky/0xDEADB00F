@@ -18,20 +18,16 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
 # Including directories
 include_directories(${PROJECT_SOURCE_DIR}/include
                     ${PROJECT_SOURCE_DIR}/third_party
-                    ${PROJECT_SOURCE_DIR}/third_party/vk-bootstrap/src
                     ${PROJECT_SOURCE_DIR}/third_party/tinyobjloader)
 
-message(STATUS "Building Lib: VMA")
-add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/VulkanMemoryAllocator)
+
 message(STATUS "Building Lib: GLM")
 add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/glm)
 message(STATUS "Building Lib: TinyOBJLoader")
 add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/tinyobjloader)
-message(STATUS "Building Lib: VkBootstrap")
-set_directory_properties(PROPERTIES DIRECTORY ${PROJECT_SOURCE_DIR}/third_party/vk-bootstrap
-                       COMPILE_OPTIONS "-w")
-add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/vk-bootstrap)
 message(STATUS "Building Lib: fastGLTF")
+set_directory_properties(PROPERTIES DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/third_party/fastgltf
+                       COMPILE_OPTIONS "-w")
 add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/fastgltf)
 
 include_directories(${SDL2_INCLUDE_DIRS} ${Vulkan_INCLUDE_DIRS})

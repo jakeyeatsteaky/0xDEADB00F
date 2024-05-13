@@ -47,7 +47,7 @@ void App::Setup()
     m_renderer = std::make_unique<VulkanRenderer>();
     bool initParam3 = m_renderer->Init();
 
-    m_initialized = initParam1 && initParam2;
+    m_initialized = initParam1 && initParam2 && initParam3;
 }
 
 bool App::AppShouldQuit()

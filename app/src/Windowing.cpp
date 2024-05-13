@@ -25,7 +25,7 @@ bool Window::Init()
                                 SDL_WINDOWPOS_CENTERED,
                                 DEFAULT_WINDOW_WIDTH,
                                 DEFAULT_WINDOW_HEIGHT,
-                                SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+                                SDL_WINDOW_SHOWN | SDL_WINDOW_VULKAN | SDL_WINDOW_RESIZABLE);
     if(nullptr == window) { 
         ERR("Failed to create SDL window", SDL_GetError());
         return ret;
