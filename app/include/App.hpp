@@ -4,6 +4,7 @@
 #include <memory>
 #include "Windowing.hpp"
 #include "EventManager.hpp"
+#include "RenderingEngine.hpp"
 
 class SDLInit
 {
@@ -22,6 +23,7 @@ private:
     std::unique_ptr<SDLInit> m_sdl;
     std::unique_ptr<Window> m_windowObj;
     std::unique_ptr<EventManager> m_events;
+    std::unique_ptr<RenderingEngine> m_renderer;
 
     void Setup();
     bool AppShouldQuit();

@@ -6,6 +6,8 @@ project(RenderingEngine)
 # Create the library target
 add_library(RenderingEngine STATIC
     src/RenderingEngine.cpp
+    src/Utility.cpp
+    src/Logger.cpp
 )
 
 # Specify the include directories for the library

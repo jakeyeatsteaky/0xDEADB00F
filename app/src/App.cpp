@@ -43,6 +43,9 @@ void App::Setup()
     m_events = std::make_unique<EventManager>();
     bool initParam2 = m_events->Init();
 
+    m_renderer = std::make_unique<RenderingEngine>(Renderer_Type::Vulkan);
+    bool initParam3 = m_renderer->Init();
+
     m_initialized = initParam1 && initParam2;
 }
 
@@ -63,7 +66,7 @@ void App::Update()
 
 void App::Render()
 {
-
+    m_renderer->Render();
 }
 
 void App::Run()
