@@ -1,37 +1,16 @@
 #ifndef RENDERING_ENGINE_HPP
 #define RENDERING_ENGINE_HPP
 
-typedef enum{
-    Vulkan,
-    OpenGL
-} Renderer_Type;
-
 class RenderingEngine
 {
 private:
-    bool Init_Vulkan();
-    bool Init_OpenGL(); 
-    void Cleanup();
 
-    Renderer_Type m_type;
 public:
-    RenderingEngine(Renderer_Type type);
-    ~RenderingEngine();
+    virtual ~RenderingEngine(){}
 
-    bool Init();
-    void Render();
+    virtual bool Init() = 0;
+    virtual void Render() = 0;
+    virtual void Cleanup() = 0;
 };
 
 #endif // end rendering engine
-
-class Renderer
-{
-private:
-
-public:
-
-    Renderer();
-    ~Renderer();
-
-
-};

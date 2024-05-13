@@ -32,6 +32,7 @@
 *.app
 
 /build
+/Desktop-Debug
 *.user
 
 app/third_party/*/build/

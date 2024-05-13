@@ -2,6 +2,7 @@
 #include "App.hpp"
 #include "Logger.hpp"
 #include "Utility.hpp"
+#include "Renderer.hpp"
 
 
 SDLInit::SDLInit()
@@ -43,7 +44,7 @@ void App::Setup()
     m_events = std::make_unique<EventManager>();
     bool initParam2 = m_events->Init();
 
-    m_renderer = std::make_unique<RenderingEngine>(Renderer_Type::Vulkan);
+    m_renderer = std::make_unique<VulkanRenderer>();
     bool initParam3 = m_renderer->Init();
 
     m_initialized = initParam1 && initParam2;

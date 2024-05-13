@@ -8,6 +8,7 @@ add_library(RenderingEngine STATIC
     src/RenderingEngine.cpp
     src/Utility.cpp
     src/Logger.cpp
+    src/Renderer.cpp
 )
 
 # Specify the include directories for the library
