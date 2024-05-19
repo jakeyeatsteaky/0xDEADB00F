@@ -10,9 +10,10 @@ Global TODO:
     [x] Finish constructinng the app class (windowing, eventmanager)
     [x] construct renderer object for vulkan stuffs
     [x] How do I make the "RenderingEngine" standalone library?
+    [x] vkguide.dev start - Chapter 0 Code walkthrough.  
 
    !! START HERE !!  
-    [ ] vkguide.dev start - Chapter 0 Code walkthrough.  
+    [ ] vkguide.dev start - Chapter 1 Vulkan Initialization Code.  
     
 #endif
 

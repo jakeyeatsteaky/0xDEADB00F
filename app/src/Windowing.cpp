@@ -1,8 +1,7 @@
 #include "Windowing.hpp"
 #include "Logger.hpp"
 
-constexpr int DEFAULT_WINDOW_WIDTH = 800;
-constexpr int DEFAULT_WINDOW_HEIGHT = 600;
+
 
 Window::Window() :
     m_window(nullptr, SDL_DestroyWindow)

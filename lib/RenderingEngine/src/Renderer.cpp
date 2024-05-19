@@ -1,13 +1,20 @@
 #include "Renderer.hpp"
 #include "Logger.hpp"
 
+#include <chrono>
+#include <thread>
 
-VulkanRenderer::VulkanRenderer() :
+
+VulkanRenderer::VulkanRenderer(uint32_t width, uint32_t height) :
     m_instance(VK_NULL_HANDLE),
     m_debugMessenger(VK_NULL_HANDLE),
     m_physicalDevice(VK_NULL_HANDLE),
     m_logicalDevice(VK_NULL_HANDLE),
-    m_surface(VK_NULL_HANDLE)
+    m_surface(VK_NULL_HANDLE),
+    m_windowExtent({width, height }), 
+    m_frameNumber(0),
+    m_initialized(false),
+    stop_rendering(false)
 {
 
 }
@@ -19,19 +26,50 @@ VulkanRenderer::~VulkanRenderer()
 
 bool VulkanRenderer::Init()  
 {
-    bool ret = false;
+    // only one instance for now -- make this a singleton eventually?
+    if(true == m_initialized) {
+        Logger::Err("Only one instance of the vulkan engine is allowed");
+        m_initialized = false;
+        return m_initialized;
+    }
+
     init_vulkan();
     init_swapchain();
     init_commands();
     init_sync();
 
-    ret = true;
-    return ret;
+    m_initialized = true;
+    return m_initialized;
 }
 
 void VulkanRenderer::Render() 
 {
-    LOG("VULKANRENDERER");
+    LOG("VulkanRenderer: Render()");
+
+    if(stop_rendering) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        return;
+    }
+
+    // Any steps need to happen before the draw call?
+
+    // draw
+    Draw();
+
+}
+
+void VulkanRenderer::toggle_render(bool toggle)
+{
+    if(toggle)
+        LOG("Conserving CPU by putting the Render loop to sleep");
+    else
+        LOG("Drawing");
+    stop_rendering = toggle;
+}
+
+void VulkanRenderer::Draw()
+{
+    
 }
 
 void VulkanRenderer::init_vulkan()

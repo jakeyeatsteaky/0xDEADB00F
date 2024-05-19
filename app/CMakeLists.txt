@@ -15,11 +15,16 @@ endif()
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
 
+# Find SDL2 and Vulkan
+find_package(SDL2 REQUIRED)
+find_package(Vulkan REQUIRED)
+
 # Including directories
 include_directories(${PROJECT_SOURCE_DIR}/include
                     ${PROJECT_SOURCE_DIR}/third_party
-                    ${PROJECT_SOURCE_DIR}/third_party/tinyobjloader)
-
+                    ${PROJECT_SOURCE_DIR}/third_party/tinyobjloader
+                    ${SDL2_INCLUDE_DIRS}
+                    ${Vulkan_INCLUDE_DIRS})
 
 message(STATUS "Building Lib: GLM")
 add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/glm)
@@ -30,11 +35,6 @@ set_directory_properties(PROPERTIES DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/third_
                        COMPILE_OPTIONS "-w")
 add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/fastgltf)
 
-include_directories(${SDL2_INCLUDE_DIRS} ${Vulkan_INCLUDE_DIRS})
-
-find_package(SDL2 REQUIRED)
-find_package(Vulkan REQUIRED)
-
 # File globbing for sources and headers
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 file(GLOB_RECURSE HEADERS "include/*.hpp" "include/*.h")
@@ -42,6 +42,6 @@ file(GLOB_RECURSE HEADERS "include/*.hpp" "include/*.h")
 # Update the add_executable to correctly reference all source files and headers
 add_executable(${project_name} main.cpp ${SOURCES} ${HEADERS})
 
-target_include_directories(${PROJECT_NAME} PRIVATE include)
+target_include_directories(${project_name} PRIVATE include)
 
 target_link_libraries(${project_name} ${SDL2_LIBRARIES} ${Vulkan_LIBRARIES} GPUOpen::VulkanMemoryAllocator glm::glm RenderingEngine)

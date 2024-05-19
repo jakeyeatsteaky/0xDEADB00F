@@ -1,7 +1,9 @@
 #ifndef RENDERER_HPP
 #define RENDERER_HPP
+#include"RenderingEngine.hpp"
+#include <vulkan/vulkan.h>
+
 #include "VkBootstrap.h"
-#include "RenderingEngine.hpp"
 
 constexpr bool bUseValidationLayers = true;
 
@@ -13,6 +15,11 @@ private:
     VkPhysicalDevice m_physicalDevice;
     VkDevice m_logicalDevice;
     VkSurfaceKHR m_surface;
+
+    VkExtent2D m_windowExtent;
+    int m_frameNumber;
+    bool m_initialized;
+    bool stop_rendering;
     
 
     void init_vulkan();
@@ -21,10 +28,13 @@ private:
     void init_sync();
 
 public:
-    VulkanRenderer();
+    VulkanRenderer(uint32_t windowWidth, uint32_t windowHeight);
     ~VulkanRenderer() override;
     bool Init() override;
-    void Render() override;
+    void Render() override; 
+    void Draw();
+
+    void toggle_render(bool toggle);
 };
 
 #endif // end renderer hpp

@@ -44,7 +44,7 @@ void App::Setup()
     m_events = std::make_unique<EventManager>();
     bool initParam2 = m_events->Init();
 
-    m_renderer = std::make_unique<VulkanRenderer>();
+    m_renderer = std::make_unique<VulkanRenderer>(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
     bool initParam3 = m_renderer->Init();
 
     m_initialized = initParam1 && initParam2 && initParam3;
