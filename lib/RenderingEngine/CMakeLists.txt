@@ -3,7 +3,11 @@ cmake_minimum_required(VERSION 3.10)
 # Define the library
 project(RenderingEngine)
 
-# Find SDL2 and Vulkan
+if(MSVC)
+    set(SDL2_DIR "C:/SDL2")
+    list(APPEND CMAKE_PREFIX_PATH "${SDL2_DIR}")
+endif()
+
 find_package(SDL2 REQUIRED)
 find_package(Vulkan REQUIRED)
 

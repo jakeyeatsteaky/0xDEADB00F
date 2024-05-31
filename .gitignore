@@ -35,10 +35,7 @@
 /Desktop-Debug
 *.user
 
-app/third_party/*/build/
-app/third_party/*/logs/
-app/third_party/*/*.o
-app/third_party/*/*.a
+app/third_party/*/
 
 lib/third_party/*/build/
 lib/third_party/*/logs/

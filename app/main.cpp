@@ -1,6 +1,10 @@
+#ifdef __linux__
 #include <SDL2/SDL.h>
-#include "Logger.hpp"
+#else
+#include <SDL.h>
+#endif 
 
+#include "Logger.hpp"
 #include "App.hpp"
 
 #if 0

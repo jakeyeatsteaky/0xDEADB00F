@@ -1,47 +1,45 @@
 cmake_minimum_required(VERSION 3.10)
-set(project_name dead_beef)
-project(${project_name} VERSION 1.0)
+project(dead_beef VERSION 1.0)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-message(STATUS "Project source dir: ${PROJECT_SOURCE_DIR}")
-message(STATUS "Building project: ${PROJECT_NAME}")
 
+# Compiler options
 if(MSVC)
     add_compile_options(/W4 /WX /Zi)
 else()
-    add_compile_options(-fdiagnostics-color=always -Wall -Wextra -Werror -std=c++17 -pedantic -g)
+    add_compile_options(-Wall -Wextra -Werror -pedantic -g)
 endif()
 
+# Debug macro
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
 
-# Find SDL2 and Vulkan
+# Dependencies
 find_package(SDL2 REQUIRED)
 find_package(Vulkan REQUIRED)
 
-# Including directories
-include_directories(${PROJECT_SOURCE_DIR}/include
-                    ${PROJECT_SOURCE_DIR}/third_party
-                    ${PROJECT_SOURCE_DIR}/third_party/tinyobjloader
-                    ${SDL2_INCLUDE_DIRS}
-                    ${Vulkan_INCLUDE_DIRS})
-
-message(STATUS "Building Lib: GLM")
+# Additional libraries
 add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/glm)
-message(STATUS "Building Lib: TinyOBJLoader")
 add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/tinyobjloader)
-message(STATUS "Building Lib: fastGLTF")
-set_directory_properties(PROPERTIES DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/third_party/fastgltf
-                       COMPILE_OPTIONS "-w")
 add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/fastgltf)
 
-# File globbing for sources and headers
+# Source files
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 file(GLOB_RECURSE HEADERS "include/*.hpp" "include/*.h")
 
-# Update the add_executable to correctly reference all source files and headers
-add_executable(${project_name} main.cpp ${SOURCES} ${HEADERS})
+# Main executable
+add_executable(${PROJECT_NAME} main.cpp ${SOURCES} ${HEADERS})
 
-target_include_directories(${project_name} PRIVATE include)
+# Include directories
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+    ${SDL2_INCLUDE_DIRS}
+    ${Vulkan_INCLUDE_DIRS}
+)
 
-target_link_libraries(${project_name} ${SDL2_LIBRARIES} ${Vulkan_LIBRARIES} GPUOpen::VulkanMemoryAllocator glm::glm RenderingEngine)
+# Link libraries
+target_link_libraries(${PROJECT_NAME}
+    ${SDL2_LIBRARIES}
+    ${Vulkan_LIBRARIES}
+    glm::glm
+    RenderingEngine
+    # Ensure the Vulkan Memory Allocator target name is correct
+)
