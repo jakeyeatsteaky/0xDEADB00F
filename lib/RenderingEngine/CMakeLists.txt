@@ -12,12 +12,24 @@ find_package(SDL2 REQUIRED)
 find_package(Vulkan REQUIRED)
 
 # Create the library target
-add_library(RenderingEngine STATIC
+# Specify all source and header files
+set(SOURCES
     src/Renderer.cpp
     src/Utility.cpp
     src/Logger.cpp
     third_party/vk-bootstrap/src/VkBootstrap.cpp
 )
+
+set(HEADERS
+    include/Renderer.hpp
+    include/Utility.hpp
+    include/Logger.hpp
+    third_party/vk-bootstrap/src/VkBootstrap.h
+    # Add other header files as needed
+)
+
+# Create the library target
+add_library(RenderingEngine STATIC ${SOURCES} ${HEADERS})
 
 message(STATUS "Building Lib: VMA")
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party/VulkanMemoryAllocator)
