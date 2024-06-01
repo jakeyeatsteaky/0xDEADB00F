@@ -32,9 +32,12 @@
 *.app
 
 /build
+/Desktop-Debug
 *.user
 
-third_party/*/build/
-third_party/*/logs/
-third_party/*/*.o
-third_party/*/*.a
+app/third_party/*/
+
+lib/third_party/*/build/
+lib/third_party/*/logs/
+lib/third_party/*/*.o
+lib/third_party/*/*.a

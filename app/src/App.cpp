@@ -1,7 +1,13 @@
+
+#ifdef __linux__
 #include "SDL2/SDL.h"
+#else
+#include <SDL.h>
+#endif
 #include "App.hpp"
 #include "Logger.hpp"
 #include "Utility.hpp"
+#include "Renderer.hpp"
 
 
 SDLInit::SDLInit()
@@ -43,7 +49,10 @@ void App::Setup()
     m_events = std::make_unique<EventManager>();
     bool initParam2 = m_events->Init();
 
-    m_initialized = initParam1 && initParam2;
+    m_renderer = std::make_unique<VulkanRenderer>(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+    bool initParam3 = m_renderer->Init();
+
+    m_initialized = initParam1 && initParam2 && initParam3;
 }
 
 bool App::AppShouldQuit()
@@ -63,7 +72,7 @@ void App::Update()
 
 void App::Render()
 {
-
+    m_renderer->Render();
 }
 
 void App::Run()

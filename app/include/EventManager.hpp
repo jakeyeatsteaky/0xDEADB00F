@@ -1,7 +1,11 @@
 #ifndef EVENT_MANAGER_HPP
 #define EVENT_MANAGER_HPP
 
+#ifdef __linux__
 #include <SDL2/SDL.h>
+#else
+#include <SDL.h>
+#endif
 
 class EventManager
 {
