@@ -10,16 +10,21 @@
 #if 0
 
 Global TODO:
-    [ ] Clean up how the dependencies are managed -- i dont think I need to include the source. ==
-    [x] Finish constructinng the app class (windowing, eventmanager)
+   [x] Finish constructinng the app class (windowing, eventmanager)
     [x] construct renderer object for vulkan stuffs
     [x] How do I make the "RenderingEngine" standalone library?
     [x] vkguide.dev start - Chapter 0 Code walkthrough.  
+    [ ] vkguide.dev start - Chapter 1 Vulkan Initialization Code.  
 
    !! START HERE !!  
-    [ ] vkguide.dev start - Chapter 1 Vulkan Initialization Code.  
+    [ ] Working on SDL renderer for game.  Need to configure SDL renderer object 
+            Figure out a good way to pass the App::m_windowObj to the 
+            SDLRenderer object for SDL_CreateRenderer(...)
+    [ ] finish building sdl renderer
     
 #endif
+
+
 
 int main(int /*argc*/, char** /*argv[]*/) {
 

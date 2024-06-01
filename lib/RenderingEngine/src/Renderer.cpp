@@ -125,7 +125,17 @@ SDLRenderer::~SDLRenderer()
 
 bool SDLRenderer::Init()
 {
-    return true;
+    bool ret = false;
+    SDL_Renderer* renderer = SDL_CreateRenderer();
+
+    if (!renderer) {
+        ERR("Failed to create SDL Renderer object", SDL_GetError());
+        return ret;
+    }
+
+    m_rendererInstance.reset(renderer);
+    ret = true;
+    return ret;
 }
 
 void SDLRenderer::Render()
