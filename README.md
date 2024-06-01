@@ -55,5 +55,7 @@
 
 3. Build the RenderingEngine lib
 
+4. Set dead_beef as startup project
+
 4. Ensure SDL.dll path is in system environment
 
