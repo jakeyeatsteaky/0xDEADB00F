@@ -25,7 +25,8 @@ App::App() :
     m_initialized(false),
     m_isRunning(false),
     m_windowObj(nullptr),
-    m_events(nullptr)
+    m_events(nullptr),
+    m_rendererType(DEFAULT_RENDERER_TYPE)
 {
     Setup();
 }
@@ -49,7 +50,11 @@ void App::Setup()
     m_events = std::make_unique<EventManager>();
     bool initParam2 = m_events->Init();
 
-    m_renderer = std::make_unique<VulkanRenderer>(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+    if(RendererType::eSDLRenderer == m_rendererType)
+        m_renderer = std::make_unique<SDLRenderer>(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+    else
+        m_renderer = std::make_unique<VulkanRenderer>(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+    
     bool initParam3 = m_renderer->Init();
 
     m_initialized = initParam1 && initParam2 && initParam3;
@@ -82,16 +87,13 @@ void App::Run()
         throw std::runtime_error("RUN failed");
     }
 
-    int count = 10;
-    while(!AppShouldQuit() && count > 0) {
+    while(!AppShouldQuit()) {
 
         Input();
         Update();
         Render();
 
-        util::TimeDelay_ms(1000);
-        count--;
-        LOG("iteration:", count);
+        util::TimeDelay_ms(100);
     }
 
 

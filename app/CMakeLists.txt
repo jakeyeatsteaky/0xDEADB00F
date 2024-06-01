@@ -43,3 +43,9 @@ target_link_libraries(${PROJECT_NAME}
     RenderingEngine
     # Ensure the Vulkan Memory Allocator target name is correct
 )
+
+if(MSVC)
+    target_compile_options(fastgltf PRIVATE /w)
+else()
+    target_compile_options(fastgltf PRIVATE -w)
+endif()

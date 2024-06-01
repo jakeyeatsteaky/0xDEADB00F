@@ -44,8 +44,6 @@ bool VulkanRenderer::Init()
 
 void VulkanRenderer::Render() 
 {
-    LOG("VulkanRenderer: Render()");
-
     if(stop_rendering) {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         return;
@@ -106,4 +104,32 @@ void VulkanRenderer::init_sync()
 
 }
 
+
+
+//////////////////////////////////////////////////////////////////////
+//                                                                  //
+//                          SDL RENDERER                            //
+//                                                                  //
+//////////////////////////////////////////////////////////////////////
+
+SDLRenderer::SDLRenderer(uint32_t windowWidth, uint32_t windowHeight) :
+    m_rendererInstance(nullptr, SDL_DestroyRenderer)
+{
+    LOG("Creating SDL Renderer object");
+}
+
+SDLRenderer::~SDLRenderer()
+{
+    LOG("\tDestroying SDL Renderer");
+}
+
+bool SDLRenderer::Init()
+{
+    return true;
+}
+
+void SDLRenderer::Render()
+{
+
+}
 

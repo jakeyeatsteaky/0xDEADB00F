@@ -1,9 +1,12 @@
 #ifndef RENDERER_HPP
 #define RENDERER_HPP
 #include"RenderingEngine.hpp"
+#include <memory>
 #include <vulkan/vulkan.h>
+#include <SDL_render.h>
 
 #include "VkBootstrap.h"
+
 
 constexpr bool bUseValidationLayers = true;
 
@@ -35,6 +38,18 @@ public:
     void Draw();
 
     void toggle_render(bool toggle);
+};
+
+class SDLRenderer : public RenderingEngine
+{
+private:
+    std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> m_rendererInstance;
+
+public:
+    SDLRenderer(uint32_t windowWidth, uint32_t windowHeight);
+    ~SDLRenderer() override;
+    bool Init() override;
+    void Render() override;
 };
 
 #endif // end renderer hpp
