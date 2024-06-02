@@ -5,12 +5,7 @@
 #include "Windowing.hpp"
 #include "EventManager.hpp"
 #include "RenderingEngine.hpp"
-
-typedef enum
-{
-    eVulkanRenderer,
-    eSDLRenderer
-}RendererType;
+#include "GameObject.hpp"
 
 constexpr RendererType DEFAULT_RENDERER_TYPE = RendererType::eSDLRenderer;
 
@@ -33,10 +28,13 @@ private:
     std::unique_ptr<Window> m_windowObj;
     std::unique_ptr<EventManager> m_events;
     std::unique_ptr<RenderingEngine> m_renderer;
+    std::vector<std::unique_ptr<GameObject>> m_gameObjects;
 
 
     void Setup();
     bool AppShouldQuit();
+    void InitStartState();
+    void SyncRenderData();
 
     void Input();
     void Update();

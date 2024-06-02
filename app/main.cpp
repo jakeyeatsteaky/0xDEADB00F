@@ -17,10 +17,12 @@ Global TODO:
     [ ] vkguide.dev start - Chapter 1 Vulkan Initialization Code.  
 
    !! START HERE !!  
-    [ ] Working on SDL renderer for game.  Need to configure SDL renderer object 
-            Figure out a good way to pass the App::m_windowObj to the 
-            SDLRenderer object for SDL_CreateRenderer(...)
-    [ ] finish building sdl renderer
+    [ ] Need to pass updates to renderData when position is updated to the renderer.  
+            probably neeeds to be a method in the App class.  Basically getting game objects
+            synced up with object render data in the rendering lib.
+    [ ] Create SDL Text for FPS counter
+    [ ] Create pixel art character for texture?
+
     
 #endif
 

@@ -148,7 +148,37 @@ void SDLRenderer::Render()
     SDL_SetRenderDrawColor(m_rendererInstance.get(), 0xFF, 0, 0xFF, 255);
     SDL_RenderClear(m_rendererInstance.get());
     
+    RenderGameObjects();
 
     SDL_RenderPresent(m_rendererInstance.get());
+}
+
+void SDLRenderer::AddRenderObject(RenderData object)
+{
+    m_renderObjects.push_back(object);
+}
+
+void SDLRenderer::UpdateRenderObject(size_t idx, RenderData newData)
+{
+    m_renderObjects.at(idx).colorData = newData.colorData;
+    m_renderObjects.at(idx).positionData = newData.positionData;
+}
+
+void SDLRenderer::RenderGameObjects() const
+{
+    uint32_t DEFAULT_RECT_SIZE = 200;
+
+    for (size_t i = 0; i < m_renderObjects.size(); i++) {
+        RenderData data = m_renderObjects.at(i);
+        uint32_t RED = data.colorData.r;
+        uint32_t GREEN = data.colorData.g;
+        uint32_t BLUE = data.colorData.b;
+        uint32_t ALPHA = data.colorData.a;
+
+        SDL_SetRenderDrawColor(m_rendererInstance.get(), RED, GREEN, BLUE, ALPHA);
+        SDL_Rect fillRect = { data.positionData.x, data.positionData.y, DEFAULT_RECT_SIZE, DEFAULT_RECT_SIZE };
+
+        SDL_RenderFillRect(m_rendererInstance.get(), &fillRect);
+    }
 }
 

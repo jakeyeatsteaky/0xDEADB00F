@@ -35,6 +35,8 @@ public:
     ~VulkanRenderer() override;
     bool Init() override;
     void Render() override; 
+    void AddRenderObject(RenderData /*object*/)override {};
+    void UpdateRenderObject(size_t /*idx*/, RenderData /*newData*/) override {};
     void Draw();
 
     void toggle_render(bool toggle);
@@ -45,12 +47,15 @@ class SDLRenderer : public RenderingEngine
 private:
     std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> m_rendererInstance;
     SDL_Window& m_SDLWindow;
-
+    std::vector<RenderData> m_renderObjects;
 public:
     SDLRenderer(uint32_t windowWidth, uint32_t windowHeight, SDL_Window& window);
     ~SDLRenderer() override;
     bool Init() override;
     void Render() override;
+    void AddRenderObject(RenderData object) override;
+    void UpdateRenderObject(size_t idx, RenderData newData) override;
+    void RenderGameObjects() const;
 };
 
 #endif // end renderer hpp

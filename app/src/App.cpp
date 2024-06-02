@@ -8,6 +8,7 @@
 #include "Logger.hpp"
 #include "Utility.hpp"
 #include "Renderer.hpp"
+#include "GameObject.hpp"
 
 
 SDLInit::SDLInit()
@@ -75,12 +76,42 @@ void App::Input()
 
 void App::Update()
 {
+    for (size_t i = 0; i < m_gameObjects.size(); i++)
+    {
+        m_gameObjects.at(i)->Update();
+    }
 
+    SyncRenderData();
+}
+
+void App::SyncRenderData()
+{
+    for (size_t i = 0; i < m_gameObjects.size(); i++)
+    {
+        RenderData data = m_gameObjects.at(i).get()->GetRenderData();
+        m_renderer->UpdateRenderObject(i, data);
+    }
 }
 
 void App::Render()
 {
     m_renderer->Render();
+}
+
+void App::InitStartState()
+{
+    // Initialize game objects here.  
+    m_gameObjects.push_back(GameObject::CreateObject(m_rendererType));
+
+    for (size_t i = 0; i < m_gameObjects.size(); i++) {
+        GameObject* object = m_gameObjects.at(i).get();
+        if (!object->Init())
+            ERR("Could not create game object at index: " + i);
+
+        RenderData data = object->GetRenderData();
+        m_renderer->AddRenderObject(data);
+    }
+    
 }
 
 void App::Run()
@@ -90,6 +121,9 @@ void App::Run()
         throw std::runtime_error("RUN failed");
     }
 
+    InitStartState();
+
+    LOG("App Start: We are underway!");
     while(!AppShouldQuit()) {
 
         Input();
@@ -98,6 +132,4 @@ void App::Run()
 
         util::TimeDelay_ms(100);
     }
-
-
 }
