@@ -44,9 +44,10 @@ class SDLRenderer : public RenderingEngine
 {
 private:
     std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> m_rendererInstance;
+    SDL_Window& m_SDLWindow;
 
 public:
-    SDLRenderer(uint32_t windowWidth, uint32_t windowHeight);
+    SDLRenderer(uint32_t windowWidth, uint32_t windowHeight, SDL_Window& window);
     ~SDLRenderer() override;
     bool Init() override;
     void Render() override;

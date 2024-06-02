@@ -22,7 +22,7 @@ public:
     Window();
     ~Window() noexcept;
     bool Init();
-    SDL_Window* GetWindow();
+    SDL_Window& GetWindow();
 
 };
 #endif //end windowing hpp
