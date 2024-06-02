@@ -9,17 +9,22 @@
 
 #if 0
 
-Global TODO:
+FINISHED:
    [x] Finish constructinng the app class (windowing, eventmanager)
     [x] construct renderer object for vulkan stuffs
     [x] How do I make the "RenderingEngine" standalone library?
     [x] vkguide.dev start - Chapter 0 Code walkthrough.  
-    [ ] vkguide.dev start - Chapter 1 Vulkan Initialization Code.  
-
-   !! START HERE !!  
     [x] Need to pass updates to renderData when position is updated to the renderer.  
             probably neeeds to be a method in the App class.  Basically getting game objects
             synced up with object render data in the rendering lib.
+
+TODO:
+    [ ] vkguide.dev start - Chapter 1 Vulkan Initialization Code.  
+
+CURRENTLY_WORKING_ON_IT:
+    !! START HERE !!  
+
+    [ ] Start pulling in code from 2d physics engine.  I think this will make the movement more smooth.
     [ ] SDL rect updated by keys
     [ ] figure out how to handle keyboard events
     [ ] Create SDL Text for FPS counter
