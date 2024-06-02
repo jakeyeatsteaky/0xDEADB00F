@@ -112,8 +112,9 @@ void VulkanRenderer::init_sync()
 //                                                                  //
 //////////////////////////////////////////////////////////////////////
 
-SDLRenderer::SDLRenderer(uint32_t windowWidth, uint32_t windowHeight) :
-    m_rendererInstance(nullptr, SDL_DestroyRenderer)
+SDLRenderer::SDLRenderer(uint32_t windowWidth, uint32_t windowHeight, SDL_Window& window) :
+    m_rendererInstance(nullptr, SDL_DestroyRenderer),
+    m_SDLWindow(window)
 {
     LOG("Creating SDL Renderer object");
 }
@@ -125,11 +126,29 @@ SDLRenderer::~SDLRenderer()
 
 bool SDLRenderer::Init()
 {
-    return true;
+    bool ret = false;
+    SDL_Window* win = &m_SDLWindow;
+    SDL_Renderer* renderer = nullptr;
+
+    if (win)
+        renderer = SDL_CreateRenderer(win, 0, SDL_RENDERER_ACCELERATED);
+
+    if (!renderer) {
+        ERR("Failed to create SDL Renderer object", SDL_GetError());
+        return ret;
+    }
+
+    m_rendererInstance.reset(renderer);
+    ret = true;
+    return ret;
 }
 
 void SDLRenderer::Render()
 {
+    SDL_SetRenderDrawColor(m_rendererInstance.get(), 0xFF, 0, 0xFF, 255);
+    SDL_RenderClear(m_rendererInstance.get());
+    
 
+    SDL_RenderPresent(m_rendererInstance.get());
 }
 

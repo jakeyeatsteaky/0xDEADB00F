@@ -34,5 +34,13 @@ bool Window::Init()
 
     ret = true;
     return ret;
+}
 
+SDL_Window& Window::GetWindow()
+{
+    if (!m_window) {
+        throw std::runtime_error("SDL_Window is not initialized");
+    }
+
+    return *m_window;
 }

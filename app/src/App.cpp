@@ -51,9 +51,12 @@ void App::Setup()
     bool initParam2 = m_events->Init();
 
     if(RendererType::eSDLRenderer == m_rendererType)
-        m_renderer = std::make_unique<SDLRenderer>(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+        m_renderer = std::make_unique<SDLRenderer>(DEFAULT_WINDOW_WIDTH, 
+                                                    DEFAULT_WINDOW_HEIGHT,
+                                                    m_windowObj->GetWindow());
     else
-        m_renderer = std::make_unique<VulkanRenderer>(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+        m_renderer = std::make_unique<VulkanRenderer>(DEFAULT_WINDOW_WIDTH, 
+                                                        DEFAULT_WINDOW_HEIGHT); 
     
     bool initParam3 = m_renderer->Init();
 
