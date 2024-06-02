@@ -5,6 +5,7 @@
 #include <SDL.h>
 #endif
 #include "App.hpp"
+#include "AppUtil.hpp"
 #include "Logger.hpp"
 #include "Utility.hpp"
 #include "Renderer.hpp"
@@ -76,8 +77,18 @@ void App::Input()
 
 void App::Update()
 {
+    int timeToWait = MS_PER_FRAME - (SDL_GetTicks() - timePrevFrame);
+    if (timeToWait > 0)
+        SDL_Delay(timeToWait);
+
+    float  deltaTime = (SDL_GetTicks() - timePrevFrame) / 1000.0f;
+    if (deltaTime > 0.05)
+        deltaTime = 0.05f;
+    timePrevFrame = SDL_GetTicks();
+
     for (size_t i = 0; i < m_gameObjects.size(); i++)
     {
+        m_gameObjects.at(i)->SetDT(deltaTime);
         m_gameObjects.at(i)->Update();
     }
 

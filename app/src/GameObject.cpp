@@ -1,5 +1,6 @@
 #include "GameObject.hpp"
 #include "Logger.hpp"
+#include "AppUtil.hpp"
 
 
 std::unique_ptr<GameObject> GameObject::CreateObject(RendererType type)
@@ -21,8 +22,9 @@ std::unique_ptr<GameObject> GameObject::CreateObject(RendererType type)
 
 
 GameObject_SDL::GameObject_SDL() :
-    m_pos(glm::vec2{0,0}),
-    m_color(glm::vec4{0,0,0xFF, 0xFF})
+    m_pos(glm::vec2{ 0,0 }),
+    m_color(glm::vec4{ 0,0,0xFF, 0xFF }),
+    m_deltaTime(0.0f)
 {
 	LOG("Creating an SDL game object");
 }
@@ -53,10 +55,15 @@ RenderData GameObject_SDL::GetRenderData()
     return m_renderData;
 }
 
+void GameObject_SDL::SetDT(float deltaTime)
+{
+    m_deltaTime = deltaTime;
+}
+
 void GameObject_SDL::Update()
 {
     // Process changes
-    m_pos += glm::vec2(1, 1);
+    m_pos += glm::vec2(PIXELS_PER_METER * m_deltaTime, PIXELS_PER_METER * m_deltaTime);
 
     // Update renderData
     m_renderData.colorData = m_color;

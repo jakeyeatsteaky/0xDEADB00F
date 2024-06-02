@@ -50,6 +50,11 @@ void EventManager::handleKeyDown(SDL_KeyboardEvent e)
         case SDLK_ESCAPE:
             m_shouldQuit = true;
             break;
+        case SDLK_LEFT:
+
+            break;
+        case SDLK_RIGHT:
+            break;
         default:
             break;
     }

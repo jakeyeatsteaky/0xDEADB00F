@@ -17,9 +17,11 @@ Global TODO:
     [ ] vkguide.dev start - Chapter 1 Vulkan Initialization Code.  
 
    !! START HERE !!  
-    [ ] Need to pass updates to renderData when position is updated to the renderer.  
+    [x] Need to pass updates to renderData when position is updated to the renderer.  
             probably neeeds to be a method in the App class.  Basically getting game objects
             synced up with object render data in the rendering lib.
+    [ ] SDL rect updated by keys
+    [ ] figure out how to handle keyboard events
     [ ] Create SDL Text for FPS counter
     [ ] Create pixel art character for texture?
 
